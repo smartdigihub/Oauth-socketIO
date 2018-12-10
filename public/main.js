@@ -8,8 +8,8 @@ const message = document.querySelector('#message'),
   chat = document.querySelector('#chat'),
   feedback = document.querySelector('#feedback'),
   clean = document.querySelector('#clean');
-time = document.querySelector('#time');
-userstatus = document.querySelector('#userstatus');
+  time = document.querySelector('#time');
+  userstatus = document.querySelector('#userstatus');
 
 //Add event for sending message on enter
 message.addEventListener("keyup", (e) => {
