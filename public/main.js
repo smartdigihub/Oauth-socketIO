@@ -1,5 +1,5 @@
 const socket = io.connect(location.origin);
-console.log(location)
+//console.log(location)
 // dom
 const message = document.querySelector('#message'),
   handle = document.querySelector('#name'),
