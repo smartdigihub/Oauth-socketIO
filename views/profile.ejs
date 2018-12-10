@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Whats{Chat}</title>
+        <link rel="stylesheet" href="../public/main.css">
+        <script src="/socket.io/socket.io.js"></script>
+        <style>
+            body{
+                font-family: arial;
+                margin: 0;
+            }
+            nav{
+                background: rgb(255, 81, 0);
+                padding: 20px 10px;
+            }
+            nav ul{
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 0;
+            }
+            nav li{
+                list-style-type: none;
+                display: inline-block;
+                margin: 0 10px 0 0;
+            }
+            nav a{
+                color: #fff;
+                font-size: 18px;
+                background: rgba(255,255,255,0.2);
+                text-decoration: none;
+                padding: 10px;
+                display: block;
+            }
+            main, header{
+                max-width: 960px;
+                margin: 30px auto;
+                padding: 0 10px;
+                color: #333;
+            }
+            main img{
+                /* width: 40px; */
+                margin-right: 10px;
+                position: relative;
+                top: 12px;
+            }
+            main p{
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <ul>
+                <% if (user) { %>
+                <li><a href="/auth/logout">Log out</a></li>
+                <% } else { %>
+                <li><a href="/auth/login">Login</a></li>
+                <% } %>
+                <li><a href="/">Homepage</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul>
+        </nav>
+        <header>
+            <h1>Welcome to your Profile! <%= user.username %></h1>
+            <hr>
+        </header>
+        <main style="text-align: center">
+            <img src="<%= user.thumbnail %>" />
+        </main>
+        <!-- <h1><img src="../public/orange.png" alt="">Whats{Chat}</h1> -->
+  
+  <strong><div id="userstatus"></div></strong>
+  
+  <div class="mario-chat">
+      <div class="upload-btn-wrapper">
+          <button class="btn">Set Chat Background</button>
+          <input type='file' id='getval' name="background-image" onchange="readURL(event)"/>
+      </div>
+    <div class="chat-window" id="chat">
+      <% messages.map(msg => { %>
+      <div class="msg">
+          <div class="output" id="output">
+              
+                <strong><%= msg.name %>: </strong><%= msg.message %>
+                
+            </div>
+          <div class="time" id="time">
+              <b><%= msg.createdAt %></b>
+           
+          </div>
+          
+      </div>
+      <% }); %>
+
+      <div id="feedback"></div>
+      
+    </div>
+    <input type="text" id="name" placeholder="Enter Your Name" value="<%= user.username %>" disabled="true">
+    <input type="text" id="message" placeholder="Enter a Message">
+    <button id="send">Send</button>
+  </div>
+  <script src="../public/main.js"></script>
+    </body>
+</html>
