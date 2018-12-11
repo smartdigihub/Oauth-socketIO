@@ -33,7 +33,7 @@ module.exports = (io) => {
       //console.log(data)
       //create current time using Date method
       var date = new Date();
-      Chat.createdAt = date.toLocaleTimeString();
+      Chat.createdAt = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit', hour12: false});
       //console.log(Chat.createdAt);
 
       Chat.create({ name: data.handle, message: data.message, createdAt: Chat.createdAt }).then((result) => {

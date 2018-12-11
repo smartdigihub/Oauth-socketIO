@@ -1,15 +1,16 @@
 const socket = io.connect(location.origin);
 //console.log(location)
 // dom
-const message = document.querySelector('#message'),
-  handle = document.querySelector('#name'),
-  btn = document.querySelector('#send'),
-  output = document.querySelector('#output'),
-  chat = document.querySelector('#chat'),
-  feedback = document.querySelector('#feedback'),
-  clean = document.querySelector('#clean');
-  time = document.querySelector('#time');
-  userstatus = document.querySelector('#userstatus');
+const message = document.querySelector('.message'),
+      handle = document.querySelector('#name'),
+      btn = document.querySelector('#send'),
+      output = document.querySelector('#output'),
+      chat = document.querySelector('#chat'),
+      feedback = document.querySelector('#feedback'),
+      clean = document.querySelector('#clean');
+      time = document.querySelector('#time');
+      userstatus = document.querySelector('#userstatus');
+
 
 //Add event for sending message on enter
 message.addEventListener("keyup", (e) => {
@@ -19,6 +20,7 @@ message.addEventListener("keyup", (e) => {
   }
 });
 
+//console.log(message);
 //chat.style.overflow = 'hidden';
 chat.scrollTop = chat.scrollHeight;
 

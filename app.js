@@ -13,7 +13,9 @@ const app = express();
 
 const port = process.env.PORT || 3000;
 
-const server = http.createServer(app).listen(port);
+const server = http.createServer(app).listen(port, ()=>{
+    console.log(`Server started on port ${port}`);
+});
 
 const io = ServerIO.listen(server);
 

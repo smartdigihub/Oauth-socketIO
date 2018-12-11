@@ -2,54 +2,24 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Whats{Chat}</title>
-        <link rel="stylesheet" href="../public/main.css">
+        <title>Whats{Chat} Dashboard</title>
+
+        <!-- ** StyleSheets Begin ** -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/public/lib/css/emoji.css">
+        <link rel="stylesheet" href="/public/main.css">
+        <!-- ** StyleSheets End ** -->
+
+        <!-- ** Script tag Begin ** -->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-        <style>
-            body{
-                font-family: arial;
-                margin: 0;
-            }
-            nav{
-                background: rgb(255, 81, 0);
-                padding: 20px 10px;
-            }
-            nav ul{
-                max-width: 960px;
-                margin: 0 auto;
-                padding: 0;
-            }
-            nav li{
-                list-style-type: none;
-                display: inline-block;
-                margin: 0 10px 0 0;
-            }
-            nav a{
-                color: #fff;
-                font-size: 18px;
-                background: rgba(255,255,255,0.2);
-                text-decoration: none;
-                padding: 10px;
-                display: block;
-            }
-            main, header{
-                max-width: 960px;
-                margin: 30px auto;
-                padding: 0 10px;
-                color: #333;
-            }
-            main img{
-                /* width: 40px; */
-                margin-right: 10px;
-                position: relative;
-                /*top: 12px;*/
-            }
-            main p{
-                display: inline-block;
-            }
-        </style>
+        <!-- ** Script tag End ** -->
+
     </head>
     <body>
+
+        <!-- ** NavBar Begin ** -->
         <nav>
             <ul>
                 <li><a href="/">Homepage</a></li>
@@ -59,48 +29,83 @@
                 <% } else { %>
                 <li><a href="/auth/login">Login</a></li>
                 <% } %>
-
             </ul>
         </nav>
+        <!-- ** NavBar End ** -->
+
         <header>
             <h1>Welcome to your Profile! <%= user.username %></h1>
-            <hr>
         </header>
+        <hr>
+
         <main style="text-align: center">
             <img src="<%= user.thumbnail %>" />
         </main>
-        <!-- <h1><img src="../public/orange.png" alt="">Whats{Chat}</h1> -->
   
   <strong><div id="userstatus"></div></strong>
-  
+ 
+  <!-- ** Chat container Begin ** -->
   <div class="mario-chat">
+
+      <!-- ** Set Background ** -->
       <div class="upload-btn-wrapper">
           <button class="btn">Set Chat Background</button>
           <input type='file' id='getval' name="background-image" onchange="readURL(event)"/>
       </div>
+      <!-- ** End Background ** -->
+
+    <!-- ** Begin Chat Window div ** -->
     <div class="chat-window" id="chat">
       <% messages.map(msg => { %>
       <div class="msg">
           <div class="output" id="output">
-              
                 <strong><%= msg.name %>: </strong><%= msg.message %>
-                
             </div>
           <div class="time" id="time">
               <b><%= msg.createdAt %></b>
-           
           </div>
-          
       </div>
       <% }); %>
-
       <div id="feedback"></div>
-      
     </div>
-    <input type="text" id="name" placeholder="Enter Your Name" value="<%= user.username %>" disabled="true">
-    <input type="text" id="message" placeholder="Enter a Message">
+    <!-- ** End Chat Window div ** -->
+
+    <!-- ** Begin Buttons ** -->
+    <div>
+            <input type="text" id="name" placeholder="Enter Your Name" value="<%= user.username %>" disabled="true">
+    </div>
+    
+    <div class="lead emoji-picker-container">
+            <input type="text" class="message form-control" placeholder="Enter a message" data-emojiable="true">
+    </div>
+    
     <button id="send">Send</button>
+    <!-- ** End Buttons ** -->
+
   </div>
-  <script src="../public/main.js"></script>
+
+  <!-- ** Chat container End ** -->
+
+    <!-- ** Emoji Scripts Include ** -->
+    <script src="/public/lib/js/config.js"></script>
+    <script src="/public/lib/js/util.js"></script>
+    <script src="/public/lib/js/jquery.emojiarea.js"></script>
+    <script src="/public/lib/js/emoji-picker.js"></script>
+    <!-- ** Emoji Scripts End ** -->
+    <script>
+        $(function() {
+            // Initializes and creates emoji set from sprite sheet
+            window.emojiPicker = new EmojiPicker({
+                emojiable_selector: '[data-emojiable=true]',
+                assetsPath: '/public/lib/img',
+                popupButtonClasses: 'fa fa-smile-o'
+            });
+            // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+            // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+            // It can be called as many times as necessary; previously converted input fields will not be converted again
+            window.emojiPicker.discover();
+        });
+        </script>
+        <script src="/public/main.js"></script>
     </body>
 </html>
